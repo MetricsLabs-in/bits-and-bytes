@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bits & Bytes</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .container {
+            margin-top: 70px;
+            text-align: center;
+        }
+        .timer {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#CS101Navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Bits & Bytes</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Bits & Bytes</h1>
+        <h2>Welcome to Bits & Bytes!</h2>
+        <p>
+            At Bits and Bytes, we are passionate about turning your vision into reality through cutting-edge technology and innovative solutions. Our dedicated team of experts is committed to delivering an exceptional experience from inception to completion. We recognize the uniqueness of each project and collaborate closely with our clients to ensure their dreams become tangible.
+            Our mission at Bits and Bytes is to deliver high-performance, innovative solutions. Our team of experts harnesses the latest technologies and industry best practices to craft applications that are not only fast and reliable but also highly scalable. Whether you require a straightforward AI app or a sophisticated enterprise solution, we have the expertise to meet your needs.
+        </p>
+
+        <div class="timer" id="timer">Loading timer...</div>
+    </div>
+
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("nav.html");
+        });
+
+        function startTimer(duration, display) {
+            var timer = duration, days, hours, minutes, seconds;
+            setInterval(function () {
+                days = parseInt(timer / (60 * 60 * 24), 10);
+                hours = parseInt((timer % (60 * 60 * 24)) / (60 * 60), 10);
+                minutes = parseInt((timer % (60 * 60)) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                days = days < 10 ? "0" + days : days;
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var twoDays = 10 * 24 * 60 * 60, // 2 days in seconds
+                display = document.querySelector('#timer');
+            startTimer(twoDays, display);
+        };
+    </script>
+    <script src="cs101.js"></script>
+    <script src="cs101-table.js"></script>
+</body>
+</html>
+
